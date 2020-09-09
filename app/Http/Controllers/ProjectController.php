@@ -1,0 +1,122 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Project;
+
+class ProjectController extends Controller
+{
+    private $admin = '/admin_123';
+
+    public function index()
+    {
+        $projects = Project::all();
+
+        return view('admin.projects.projects', compact('projects'));
+    }
+
+    public function create()
+    {
+        return view('admin.projects.create');
+    }
+
+    public function store(Request $request)
+    {
+        if ($request->isMethod('post')) {
+            $input = $request->except('_token');
+            $project = new Project();
+            $project->fill($input);
+
+            $project->img_name = $input['image']->getClientOriginalName();
+
+            $path = $request->file('image')->store('uploads/images', 'public');
+
+            $project->img_path = $path;
+
+            if ($project->save()) {
+
+                return redirect($this->admin.'/projects')->with('status', 'Project was created');
+
+            } else {
+
+                unlink('public/storage/' . $path);
+
+                return redirect($this->admin.'/projects/create')->withErrors('Project wasn\'t created');
+            }
+        }
+
+        return redirect()->route('create_project')->withErrors('Error STORE');
+    }
+
+
+    public function show($id)
+    {
+        $project = Project::find($id);
+
+        return view('admin.projects.show', compact('project'));
+    }
+
+
+    public function edit($id)
+    {
+        $project = Project::find($id);
+
+        return view('admin.projects.edit', compact('project'));
+    }
+
+
+    public function update(Request $request, $id)
+    {
+        if ($request->isMethod('post')) {
+
+            $input = $request->except('_token');
+            $project = Project::find($id);
+
+            if(isset($input['image'])){
+
+                $project->img_name = $input['image']->getClientOriginalName();
+
+                if (file_exists($project->img_path)){
+                    unlink('public/storage/'.$project->img_path);
+                }
+
+                $path = $request->file('image')->store('uploads/images', 'public');
+                $project->img_path = $path;
+            }
+            $project->fill($input);
+            $project->status = isset($input['status']) ? true : false ;
+
+            if ($project->update()) {
+
+                return redirect($this->admin.'/projects')->with('status', 'Project was updated');
+
+            } else {
+
+                return redirect($this->admin.'/projects/'.$id)->withErrors('Project wasn\'t updated');
+            }
+        }
+
+        return redirect()->route('projects')->withErrors('Error UPDATE');
+    }
+
+
+    public function destroy(Request $request, $id)
+    {
+        if ($request->isMethod('post')) {
+
+            $project = Project::find($id);
+
+            if ($project->delete()) {
+
+                return redirect($this->admin.'/projects')->with('status', 'Project was deleted');
+
+            } else {
+
+                return redirect($this->admin.'/projects')->withErrors('Project wasn\'t deleted');
+            }
+        }
+
+        return redirect()->route('projects')->withErrors('Error Deleting');
+    }
+}

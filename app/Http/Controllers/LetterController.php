@@ -1,0 +1,78 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Letter;
+
+class LetterController extends Controller
+{
+    private $admin = '/admin_123';
+
+    public function index()
+    {
+        $letters = Letter::all();
+
+        return view('admin.letters.letters', compact('letters'));
+    }
+
+
+    public function store(Request $request)
+    {
+        if ($request->isMethod('post')) {
+            $input = $request->except('_token');
+            $letter = new Letter();
+            $filename = $input['letter']->getClientOriginalName();
+            $letter->filename = $filename;
+            $path = $request->file('letter')->storeAs('uploads/letters', $filename, 'public');
+
+
+            $letter->path = $path;
+
+            if (!$letter->save()) {
+
+                unlink('public/storage/' . $path);
+
+                return redirect($this->admin.'/letters')->withErrors('Letter wasn\'t uploaded');
+            }
+
+            return redirect($this->admin.'/letters')->with('status', 'Letter was uploaded');
+        }
+    }
+
+
+    public function update(Request $request, $id)
+    {
+        Letter::where('status', 1)->update(['status' => 0]);
+        $letter = Letter::find($id);
+        $letter->status = 1;
+        if($letter->update()){
+
+            return redirect($this->admin.'/letters')->with('status', 'The Letter was update');
+        }
+
+        return redirect($this->admin.'/letters')->withErrors('The Letter wasn\'t updated');
+    }
+
+
+    public function destroy(Request $request, $id)
+    {
+        if ($request->isMethod('post')) {
+            $letter = Letter::find($id);
+
+            if($letter){
+
+                if($letter->delete()){
+
+                    unlink('public/storage/' . $letter->path);
+
+                    return redirect($this->admin.'/letters')->with('status', 'Letter was deleted');
+                }
+
+                return redirect($this->admin.'/letters')->withErrors('The Letter wasn\'t found');
+            }
+        }
+
+        return redirect($this->admin.'/letters')->withErrors('The METHOD ERROR');
+    }
+}
