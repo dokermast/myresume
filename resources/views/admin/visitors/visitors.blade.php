@@ -19,7 +19,7 @@
                                         <th>ip</th>
                                         <th>Hits</th>
                                         <th>Visited Date</th>
-                                        <th></th>
+                                        <th>Location</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -33,7 +33,7 @@
                                         <td>{{ $item->ip }}</td>
                                         <td>{{ $item->hits}}</td>
                                         <td>{{ $item->visited_date }}</td>
-                                        <td></td>
+                                        <td>{{ $item->location }}</td>
                                     </tr>
                                     @php $i++; @endphp
                                 @endforeach

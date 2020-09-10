@@ -2,30 +2,18 @@
     <section class="page-section bg-blue1" id="contact">
         <div class="container-fluid">
 
-
-
-<!--            <div id="cv-btn" class="text-center mt-4">-->
-<!--                <a class="btn btn-xl btn-outline-light btn-download">-->
-<!--                    CONTACT ME-->
-<!--                </a>-->
-<!--            </div>-->
-
-
-
-
-<!--            <h2 class="page-section-heading text-center text-white text-head text-uppercase mb-0">Contact Me</h2>-->
-
             <div class="container text-center">
 
                 <div class="row">
                     <div class="col-lg-3 mx-auto"></div>
                     <div class="col-lg-6 mx-auto">
-                        <h2 id="contact_me" @click="showContact()" class="page-section-heading text-center text-white text-head text-uppercase mb-0">Contact Me</h2>
+                        <h2 id="contact_me" @click="showContact()" class="page-section-heading text-center text-white text-head text-uppercase mb-0">
+                            {{ mail.contact_button_text }}
+                        </h2>
                     </div>
                     <div class="col-lg-3 mx-auto"></div>
                 </div>
             </div>
-
 
             <transition name="fade">
 
@@ -66,7 +54,6 @@
         name: "ContactComponent",
         data: function(){
             return {
-
                 mail: {
                     email: '',
                     message: '',
@@ -74,6 +61,7 @@
                     contact_status: false,
                     contact_message: false,
                     contact: false,
+                    contact_button_text: 'CONTACT ME'
                 }
             }
         },
@@ -102,6 +90,7 @@
             },
             showContact(){
                 this.mail.contact = !this.mail.contact;
+                this.mail.contact_button_text = this.mail.contact ? 'CLOSE FORM' : 'CONTACT ME';
             }
         },
     }

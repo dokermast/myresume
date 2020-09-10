@@ -2198,18 +2198,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ContactComponent",
   data: function data() {
@@ -2220,7 +2208,8 @@ __webpack_require__.r(__webpack_exports__);
         url: '/contact',
         contact_status: false,
         contact_message: false,
-        contact: false
+        contact: false,
+        contact_button_text: 'CONTACT ME'
       }
     };
   },
@@ -2246,6 +2235,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     showContact: function showContact() {
       this.mail.contact = !this.mail.contact;
+      this.mail.contact_button_text = this.mail.contact ? 'CLOSE FORM' : 'CONTACT ME';
     }
   }
 });
@@ -49219,7 +49209,13 @@ var render = function() {
                       }
                     }
                   },
-                  [_vm._v("Contact Me")]
+                  [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(_vm.mail.contact_button_text) +
+                        "\n                    "
+                    )
+                  ]
                 )
               ]),
               _vm._v(" "),

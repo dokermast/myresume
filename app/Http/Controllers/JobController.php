@@ -7,8 +7,6 @@ use App\Job;
 
 class JobController extends Controller
 {
-    private $admin = '/admin_123';
-
     public function index()
     {
         $jobs = Job::all();
@@ -32,10 +30,10 @@ class JobController extends Controller
 
             if ($job->save()) {
 
-                return redirect($this->admin.'/jobs')->with('status', 'Job was created');
+                return redirect(env('ADMIN').'/jobs')->with('status', 'Job was created');
             } else {
 
-                return redirect($this->admin.'/create')->withErrors('Job wasn\'t created');
+                return redirect(env('ADMIN').'/create')->withErrors('Job wasn\'t created');
             }
         }
 
@@ -62,10 +60,10 @@ class JobController extends Controller
 
             if ($job->update()) {
 
-                return redirect($this->admin.'/jobs')->with('status', 'Job was updated');
+                return redirect(env('ADMIN').'/jobs')->with('status', 'Job was updated');
             } else {
 
-                return redirect($this->admin.'/edit/'.$id)->withErrors('Job wasn\'t updated');
+                return redirect(env('ADMIN').'/edit/'.$id)->withErrors('Job wasn\'t updated');
             }
         }
 
@@ -81,10 +79,10 @@ class JobController extends Controller
 
             if ($job->delete()) {
 
-                return redirect($this->admin.'/jobs')->with('status', 'Job was deleted');
+                return redirect(env('ADMIN').'/jobs')->with('status', 'Job was deleted');
             } else {
 
-                return redirect($this->admin.'/jobs')->withErrors('Job wasn\'t deleted');
+                return redirect(env('ADMIN').'/jobs')->withErrors('Job wasn\'t deleted');
             }
         }
 

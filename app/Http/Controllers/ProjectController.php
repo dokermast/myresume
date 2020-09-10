@@ -7,8 +7,6 @@ use App\Project;
 
 class ProjectController extends Controller
 {
-    private $admin = '/admin_123';
-
     public function index()
     {
         $projects = Project::all();
@@ -36,13 +34,13 @@ class ProjectController extends Controller
 
             if ($project->save()) {
 
-                return redirect($this->admin.'/projects')->with('status', 'Project was created');
+                return redirect(env('ADMIN').'/projects')->with('status', 'Project was created');
 
             } else {
 
                 unlink('public/storage/' . $path);
 
-                return redirect($this->admin.'/projects/create')->withErrors('Project wasn\'t created');
+                return redirect(env('ADMIN').'/projects/create')->withErrors('Project wasn\'t created');
             }
         }
 
@@ -89,11 +87,11 @@ class ProjectController extends Controller
 
             if ($project->update()) {
 
-                return redirect($this->admin.'/projects')->with('status', 'Project was updated');
+                return redirect(env('ADMIN').'/projects')->with('status', 'Project was updated');
 
             } else {
 
-                return redirect($this->admin.'/projects/'.$id)->withErrors('Project wasn\'t updated');
+                return redirect(env('ADMIN').'/projects/'.$id)->withErrors('Project wasn\'t updated');
             }
         }
 
@@ -109,11 +107,11 @@ class ProjectController extends Controller
 
             if ($project->delete()) {
 
-                return redirect($this->admin.'/projects')->with('status', 'Project was deleted');
+                return redirect(env('ADMIN').'/projects')->with('status', 'Project was deleted');
 
             } else {
 
-                return redirect($this->admin.'/projects')->withErrors('Project wasn\'t deleted');
+                return redirect(env('ADMIN').'/projects')->withErrors('Project wasn\'t deleted');
             }
         }
 

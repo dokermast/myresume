@@ -30,7 +30,7 @@ class MailController extends Controller
             ];
         }
 
-//        Mail::to('vit.chebotnikov@gmail.com')->send(new HelloMail($data));
+        Mail::to('vit.chebotnikov@gmail.com')->send(new HelloMail($data));
 
         return [
             'contact_status' => true,

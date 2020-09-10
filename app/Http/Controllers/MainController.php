@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\NewEvent;
 use App\Aboutme;
 use App\Avatar;
+use App\Http\Location;
 use App\Image;
 use App\Job;
 use App\Letter;
@@ -20,7 +21,10 @@ class MainController extends Controller
     {
         $ip = $request->getClientIp();
         $visited_date = Date("Y-m-d:H:i:s");
-        $visitor = Visitor::updateOrCreate(['ip' => $ip], ['visited_date' => $visited_date]);
+
+        $location = Location::locationGet($ip);
+        $location = ($location) ? $location['country_name'] . " : " . $location['city'] : "noname";
+        $visitor = Visitor::updateOrCreate(['ip' => $ip, 'location' => $location], ['visited_date' => $visited_date]);
         $visitor->increment('hits');
 
         $jobs = Job::all();

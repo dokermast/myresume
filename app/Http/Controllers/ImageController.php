@@ -7,8 +7,6 @@ use Illuminate\Http\Request;
 
 class ImageController extends Controller
 {
-    private $admin = '/admin_123';
-
     public function index()
     {
         $images = Image::all();
@@ -31,10 +29,10 @@ class ImageController extends Controller
             if(!$image->save()){
                 unlink('public/storage/'.$path);
 
-                return redirect($this->admin.'/images')->withErrors('Image wasn\'t uploaded');
+                return redirect(env('ADMIN').'/images')->withErrors('Image wasn\'t uploaded');
             }
 
-            return redirect($this->admin.'/images')->with('status', 'Image was uploaded');
+            return redirect(env('ADMIN').'/images')->with('status', 'Image was uploaded');
         }
     }
 
@@ -46,10 +44,9 @@ class ImageController extends Controller
         $image->status = 1;
         if($image->update()){
 
-            return redirect($this->admin.'/images')->with('status', 'The Image was update');
+            return redirect(env('ADMIN').'/images')->with('status', 'The Image was update');
         }
 
-        return redirect($this->admin.'/imagess')->withErrors('The Image wasn\'t updated');
+        return redirect(env('ADMIN').'/imagess')->withErrors('The Image wasn\'t updated');
     }
-
 }

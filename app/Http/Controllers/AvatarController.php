@@ -7,8 +7,6 @@ use App\Avatar;
 
 class AvatarController extends Controller
 {
-    private $admin = '/admin_123';
-
     public function index()
     {
         $avatars = Avatar::all();
@@ -35,10 +33,10 @@ class AvatarController extends Controller
             if(!$avatar->save()){
                 unlink('public/storage/'.$path);
 
-                return redirect($this->admin.'/avatars')->withErrors('Avatar wasn\'t uploaded');
+                return redirect(env('ADMIN').'/avatars')->withErrors('Avatar wasn\'t uploaded');
             }
 
-            return redirect($this->admin.'/avatars')->with('status', 'Avatar was uploaded');
+            return redirect(env('ADMIN').'/avatars')->with('status', 'Avatar was uploaded');
         }
     }
 
@@ -50,10 +48,10 @@ class AvatarController extends Controller
         $avatar->status = 1;
         if($avatar->update()){
 
-            return redirect($this->admin.'/avatars')->with('status', 'The Avatar was update');
+            return redirect(env('ADMIN').'/avatars')->with('status', 'The Avatar was update');
         }
 
-        return redirect($this->admin.'/avatars')->withErrors('The Avatar wasn\'t updated');
+        return redirect(env('ADMIN').'/avatars')->withErrors('The Avatar wasn\'t updated');
     }
 
 
@@ -69,15 +67,15 @@ class AvatarController extends Controller
 
                 if($avatar->delete()) {
 
-                    return redirect($this->admin.'/avatars')->with('status', 'Avatar was deleted');
+                    return redirect(env('ADMIN').'/avatars')->with('status', 'Avatar was deleted');
 
                 } else {
 
-                    return redirect($this->admin.'/avatars')->withErrors('Avatar wasn\'t deleted');
+                    return redirect(env('ADMIN').'/avatars')->withErrors('Avatar wasn\'t deleted');
                 }
             }
 
-            return redirect($this->admin.'/avatars')->with('status', 'Avatar was uploaded');
+            return redirect(env('ADMIN').'/avatars')->with('status', 'Avatar was uploaded');
         }
     }
 

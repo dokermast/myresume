@@ -7,8 +7,6 @@ use App\Letter;
 
 class LetterController extends Controller
 {
-    private $admin = '/admin_123';
-
     public function index()
     {
         $letters = Letter::all();
@@ -33,10 +31,10 @@ class LetterController extends Controller
 
                 unlink('public/storage/' . $path);
 
-                return redirect($this->admin.'/letters')->withErrors('Letter wasn\'t uploaded');
+                return redirect(env('ADMIN').'/letters')->withErrors('Letter wasn\'t uploaded');
             }
 
-            return redirect($this->admin.'/letters')->with('status', 'Letter was uploaded');
+            return redirect(env('ADMIN').'/letters')->with('status', 'Letter was uploaded');
         }
     }
 
@@ -48,10 +46,10 @@ class LetterController extends Controller
         $letter->status = 1;
         if($letter->update()){
 
-            return redirect($this->admin.'/letters')->with('status', 'The Letter was update');
+            return redirect(env('ADMIN').'/letters')->with('status', 'The Letter was update');
         }
 
-        return redirect($this->admin.'/letters')->withErrors('The Letter wasn\'t updated');
+        return redirect(env('ADMIN').'/letters')->withErrors('The Letter wasn\'t updated');
     }
 
 
@@ -66,13 +64,13 @@ class LetterController extends Controller
 
                     unlink('public/storage/' . $letter->path);
 
-                    return redirect($this->admin.'/letters')->with('status', 'Letter was deleted');
+                    return redirect(env('ADMIN').'/letters')->with('status', 'Letter was deleted');
                 }
 
-                return redirect($this->admin.'/letters')->withErrors('The Letter wasn\'t found');
+                return redirect(env('ADMIN').'/letters')->withErrors('The Letter wasn\'t found');
             }
         }
 
-        return redirect($this->admin.'/letters')->withErrors('The METHOD ERROR');
+        return redirect(env('ADMIN').'/letters')->withErrors('The METHOD ERROR');
     }
 }
