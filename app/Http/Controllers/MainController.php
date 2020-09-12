@@ -33,8 +33,9 @@ class MainController extends Controller
         $image = Image::where('status', 1)->first();
         $letter = Letter::where('status', 1)->first();
         $projects = Project::where('status', 1)->get();
+        $sub = json_encode(env('SUB'));
 
-        return view('layouts.main', compact('jobs'), ['avatar' => $avatar, 'aboutme' => $aboutme, 'image' =>$image, 'letter' => $letter, 'projects' => $projects]);
+        return view('layouts.main', compact('jobs'), ['avatar' => $avatar, 'aboutme' => $aboutme, 'image' =>$image, 'letter' => $letter, 'projects' => $projects, 'sub' => $sub ]);
     }
 
 }

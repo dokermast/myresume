@@ -52,12 +52,15 @@
 <script>
     export default {
         name: "ContactComponent",
+        props: {
+            sub: String,
+        },
         data: function(){
             return {
                 mail: {
                     email: '',
                     message: '',
-                    url: '/contact',
+                    url: this.sub + '/contact',
                     contact_status: false,
                     contact_message: false,
                     contact: false,
@@ -65,7 +68,6 @@
                 }
             }
         },
-
         methods: {
             sendMsg(){
 
@@ -74,6 +76,7 @@
                     'message': this.mail.message
                 }).then((response) => {
                     if (response.data.contact_status){
+
                         this.mail.contact_status = response.data.contact_status;
 
                         setTimeout( () => {

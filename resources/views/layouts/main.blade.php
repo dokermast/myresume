@@ -10,13 +10,13 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href= "/public/img/fav-devar.png" />
+    <link rel="icon" type="image/x-icon" href= "{{ env('SUB') }}/public/img/fav-devar.png" />
 
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
 
     <!-- Scripts -->
-    <script src="{{ asset('public/js/app.js') }}" defer></script>
+    <script src="{{ env('SUB') }}/public/js/app.js" defer></script>
 
     <!-- Fonts -->
 {{--    <link rel="dns-prefetch" href="//fonts.gstatic.com">--}}
@@ -27,9 +27,9 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
 
     <!-- Styles -->
-    <link href="{{ asset('public/css/custom.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/css/styles.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/css/app.css') }}" rel="stylesheet">
+    <link href="{{ env('SUB') }}/public/css/custom.css" rel="stylesheet">
+    <link href="{{ env('SUB') }}/public/css/styles.css" rel="stylesheet">
+    <link href="{{ env('SUB') }}/public/css/app.css" rel="stylesheet">
 
     <title>VitCheVue</title>
 </head>
@@ -56,11 +56,11 @@
 
     <div id="app">
         <div class="container">
-            <avatar-component v-bind:avatar="{{ $avatar }}"></avatar-component>
+            <avatar-component v-bind:avatar="{{ $avatar }}" v-bind:sub="{{ $sub }}"></avatar-component>
             <experience-component v-bind:jobs="{{ $jobs }}" v-bind:letter="{{ $letter }}"></experience-component>
             <about-component v-bind:about="{{ $aboutme }}"></about-component>
             <apps-component v-bind:projects="{{ $projects }}"></apps-component>
-            <contact-component></contact-component>
+            <contact-component v-bind:sub="{{ $sub }}"></contact-component>
             <copyright-component></copyright-component>
         </div>
 
@@ -72,8 +72,8 @@
 <!-- Third party plugin JS-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
 <!-- Core theme JS-->
-<script src="/public/js/scripts.js"></script>
-<script src="/public/js/custom.js"></script>
+<script src="{{ env('SUB') }}/public/js/scripts.js"></script>
+<script src="{{ env('SUB') }}/public/js/custom.js"></script>
 
 </body>
 </html>

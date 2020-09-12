@@ -2131,9 +2131,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AvatarComponent",
-  props: ['avatar']
+  props: {
+    avatar: Object,
+    sub: String
+  },
+  data: function data() {
+    return {
+      img_url: '/public/img/code-background.png'
+    };
+  }
 });
 
 /***/ }),
@@ -2200,12 +2213,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ContactComponent",
+  props: {
+    sub: String
+  },
   data: function data() {
     return {
       mail: {
         email: '',
         message: '',
-        url: '/contact',
+        url: this.sub + '/contact',
         contact_status: false,
         contact_message: false,
         contact: false,
@@ -2402,8 +2418,7 @@ __webpack_require__.r(__webpack_exports__);
       dataFirst: 'border-top col-sm-7 bg-grey1-job blue-main-job',
       dataSecond: 'border-top col-sm-7',
       companyLinkFirst: 'btn btn-outline-secondary btn-white btn-white-mob company-link',
-      companyLinkSecond: 'btn btn-outline-secondary btn-blue btn-white-mob company-link',
-      foos: 'FOOOO'
+      companyLinkSecond: 'btn btn-outline-secondary btn-blue btn-white-mob company-link'
     };
   },
   methods: {}
@@ -49138,9 +49153,7 @@ var render = function() {
     "header",
     {
       staticClass: "masthead text-white text-center bg-grey1",
-      staticStyle: {
-        "background-image": "url('/public/img/code-background.png')"
-      },
+      style: { backgroundImage: "url('" + _vm.sub + _vm.img_url + "')" },
       attrs: { id: "main_block" }
     },
     [
@@ -49151,11 +49164,14 @@ var render = function() {
           _vm.avatar
             ? _c("img", {
                 staticClass: "masthead-avatar mb-8",
-                attrs: { src: _vm.avatar.path, alt: "" }
+                attrs: { src: _vm.sub + _vm.avatar.path, alt: "" }
               })
             : _c("img", {
                 staticClass: "masthead-avatar mb-8",
-                attrs: { src: "/public/img/avatars/default.svg", alt: "" }
+                attrs: {
+                  src: _vm.sub + "/public/img/avatars/default.svg",
+                  alt: ""
+                }
               })
         ]
       )
@@ -62603,8 +62619,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! d:\servers\OSP_5_7\domains\lavue\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! d:\servers\OSP_5_7\domains\lavue\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! d:\servers\OSP_5_7\domains\acasa\myresume\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! d:\servers\OSP_5_7\domains\acasa\myresume\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ }),

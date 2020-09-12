@@ -64,7 +64,6 @@
                 dataSecond: 'border-top col-sm-7',
                 companyLinkFirst: 'btn btn-outline-secondary btn-white btn-white-mob company-link',
                 companyLinkSecond: 'btn btn-outline-secondary btn-blue btn-white-mob company-link',
-                foos: 'FOOOO'
             }
         },
         methods: {
