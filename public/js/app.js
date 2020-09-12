@@ -2407,7 +2407,8 @@ __webpack_require__.r(__webpack_exports__);
   name: "ExperienceComponent",
   props: {
     jobs: Array,
-    letter: Object
+    letter: Object,
+    sub: String
   },
   data: function data() {
     return {
@@ -49692,7 +49693,9 @@ var render = function() {
                     "a",
                     {
                       staticClass: "btn btn-xl btn-outline-light btn-download",
-                      attrs: { href: "/storage/app/public/" + _vm.letter.path }
+                      attrs: {
+                        href: _vm.sub + "/storage/app/public/" + _vm.letter.path
+                      }
                     },
                     [
                       _c("i", { staticClass: "fas fa-download mr-2" }),
@@ -49703,7 +49706,9 @@ var render = function() {
                     "a",
                     {
                       staticClass: "btn btn-xl btn-outline-light btn-download",
-                      attrs: { href: "/public/files/CV_Chebotnikov.rtf" }
+                      attrs: {
+                        href: _vm.sub + "/public/files/CV_Chebotnikov.rtf"
+                      }
                     },
                     [
                       _c("i", { staticClass: "fas fa-download mr-2" }),

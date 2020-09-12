@@ -34,10 +34,10 @@
             </div>
 
             <div id="cv-btn" class="text-center mt-4">
-                <a v-if="letter.path" :href="'/storage/app/public/' + letter.path" class="btn btn-xl btn-outline-light btn-download">
+                <a v-if="letter.path" :href="sub + '/storage/app/public/' + letter.path" class="btn btn-xl btn-outline-light btn-download">
                     <i class="fas fa-download mr-2"></i>Download MY CV
                 </a>
-                <a v-else class="btn btn-xl btn-outline-light btn-download" href= "/public/files/CV_Chebotnikov.rtf">
+                <a v-else class="btn btn-xl btn-outline-light btn-download" :href= "sub + '/public/files/CV_Chebotnikov.rtf'">
                     <i class="fas fa-download mr-2"></i>Download MY CV
                 </a>
             </div>
@@ -53,6 +53,7 @@
         props: {
             jobs: Array,
             letter: Object,
+            sub: String
         },
         data: function () {
             return {

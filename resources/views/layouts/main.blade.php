@@ -57,7 +57,7 @@
     <div id="app">
         <div class="container">
             <avatar-component v-bind:avatar="{{ $avatar }}" v-bind:sub="{{ $sub }}"></avatar-component>
-            <experience-component v-bind:jobs="{{ $jobs }}" v-bind:letter="{{ $letter }}"></experience-component>
+            <experience-component v-bind:jobs="{{ $jobs }}" v-bind:letter="{{ $letter }}" v-bind:sub="{{ $sub }}"></experience-component>
             <about-component v-bind:about="{{ $aboutme }}"></about-component>
             <apps-component v-bind:projects="{{ $projects }}"></apps-component>
             <contact-component v-bind:sub="{{ $sub }}"></contact-component>
