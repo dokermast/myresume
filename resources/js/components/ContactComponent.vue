@@ -15,6 +15,27 @@
                 </div>
             </div>
 
+
+
+
+
+
+<!--            <div id="spin" class="text-center">-->
+<!--                <b-spinner label="Spinning"></b-spinner>-->
+<!--                <b-spinner type="grow" label="Spinning"></b-spinner>-->
+<!--                <b-spinner variant="primary" label="Spinning"></b-spinner>-->
+<!--                <b-spinner variant="primary" type="grow" label="Spinning"></b-spinner>-->
+<!--                <b-spinner variant="success" label="Spinning"></b-spinner>-->
+<!--                <b-spinner variant="success" type="grow" label="Spinning"></b-spinner>-->
+<!--            </div>-->
+
+
+
+
+
+
+
+
             <transition name="fade">
 
                 <div v-if="mail.contact" class="row">
@@ -29,7 +50,12 @@
                                 <input v-model="mail.message" type="text" class="form-control" placeholder="Input your message">
                             </div>
 
-                            <div id="loading"></div>
+                            <div id="loading" v-if="mail.sending">
+                                <div class="text-center">
+                                    <b-spinner variant="light" label="Spinning"></b-spinner>
+                                </div>
+                            </div>
+
                             <div v-if="mail.contact_message" id="error-message">{{mail.contact_message}}</div>
 
                             <transition name="fade">
@@ -50,6 +76,10 @@
 </template>
 
 <script>
+
+    import 'bootstrap/dist/css/bootstrap.css'
+    import 'bootstrap-vue/dist/bootstrap-vue.css'
+
     export default {
         name: "ContactComponent",
         props: {
@@ -64,13 +94,14 @@
                     contact_status: false,
                     contact_message: false,
                     contact: false,
-                    contact_button_text: 'CONTACT ME'
+                    contact_button_text: 'CONTACT ME',
+                    sending: false
                 }
             }
         },
         methods: {
             sendMsg(){
-
+                this.mail.sending = true;
                 axios.post(this.mail.url,{
                     'email': this.mail.email,
                     'message': this.mail.message
@@ -89,6 +120,8 @@
                 })
                 .catch((error) => {
                     console.log(error);
+                }).finally(() => {
+                    this.mail.sending = false;
                 });
             },
             showContact(){
@@ -112,6 +145,12 @@
         border-radius: 0.5rem;
         padding: 20px 0;
     }
+
+    #contact_me:hover {
+        color: #3490dc!important;
+        background-color: #eeeeee;
+    }
+
     .form-control:focus {
         color: #495057;
         background-color: #fff;
