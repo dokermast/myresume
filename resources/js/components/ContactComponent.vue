@@ -132,7 +132,9 @@
     }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+
+    @import "../../sass/_variables.scss";
 
     .fade-enter-active, .fade-leave-active {
         transition: opacity .9s;
@@ -140,19 +142,21 @@
     .fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
         opacity: 0;
     }
+
     #contact_me {
         border: solid 1px white;
         border-radius: 0.5rem;
         padding: 20px 0;
-    }
 
-    #contact_me:hover {
-        color: #3490dc!important;
-        background-color: #eeeeee;
+        &:hover {
+            /*color: #3490dc!important;*/
+            color: $m-blue!important;
+            background-color: $m-l-grey;
+        }
     }
 
     .form-control:focus {
-        color: #495057;
+        color: $m-blue;
         background-color: #fff;
         border-color: #6bebd1;
         outline: 0;
