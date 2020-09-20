@@ -136,6 +136,12 @@
                             <p>Visitors</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('contacts') }}" class="nav-link">
+                            <i class="nav-icon far fa-address-card"></i>
+                            <p>Contacts</p>
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </div>

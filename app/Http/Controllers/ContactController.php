@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Contact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use PHPMailer\PHPMailer\PHPMailer;
@@ -10,32 +11,68 @@ use PHPMailer\PHPMailer\PHPMailer;
 class  ContactController extends Controller
 {
 
-    public function contact(Request $request)
+    public function index()
     {
-        $input = $request->except('_token');
+        $contact = Contact::find(1);
 
-        return $input;
+        if(!$contact){
+            $contact = [
+                'id' => 1,
+                'location' => 'City, Country',
+                'linkin' => 'https://www.linkedin.com/feed/',
+                'github' => 'https://github.com',
+                'skype' => 'skype',
+                'phone' => '111111111',
+                'email' => 'mail@mail.com'
+            ];
+
+            $contact = (object)$contact;
+        }
+
+        return view('admin.contacts.contacts', compact('contact'));
     }
 
-
-    public function sendMail($email, $msg)
+    public function edit()
     {
-        $mail = new PHPMailer(true);
+        $contact = Contact::find(1);
 
-        $mail->Mailer = env('MAIL_MAILER');
-        $mail->Host = env('MAIL_HOST');
-        $mail->SMTPAuth = true;
-        $mail->Username = env('MAIL_USERNAME');
-        $mail->Password = env('MAIL_PASSWORD');
-        $mail->SMTPSecure = env('MAIL_ENCRYPTION');
-        $mail->Port = env("MAIL_PORT");
+        if(!$contact){
+            $contact = [
+                'id' => 1,
+                'location' => 'City, Country',
+                'linkin' => 'https://www.linkedin.com/feed/',
+                'github' => 'https://github.com',
+                'skype' => 'skype',
+                'phone' => '111111111',
+                'email' => 'mail@mail.com'
+            ];
 
-        $mail->setFrom($email, 'visitor');
-        $mail->addAddress('vit.chebotnikov@gmail.com');
+            $contact = (object)$contact;
+        }
 
-        $mail->Subject = "question";
-        $mail->Body = $msg;
-
-        return ($mail->send()) ? true : false;
+        return view('admin.contacts.edit', compact('contact'));
     }
+
+    public function update(Request $request, $id)
+    {
+        if ($request->isMethod('post')) {
+            $input = $request->except('_token');
+
+            $contact = Contact::find($id);
+
+            if($contact){
+                $contact->fill($input);
+            } else {
+                $contact = new Contact();
+            }
+
+            $contact->fill($input);
+            $contact->save();
+
+            return redirect(env('ADMIN').'/contacts')->with('status', 'Contact was updated');
+        }
+
+        return redirect()->route('jobs')->withErrors('Error UPDATE');
+    }
+
 }

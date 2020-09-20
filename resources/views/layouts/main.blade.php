@@ -27,7 +27,6 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
 
     <!-- Styles -->
-    <link href="{{ env('SUB') }}/public/css/custom.css" rel="stylesheet">
     <link href="{{ env('SUB') }}/public/css/styles.css" rel="stylesheet">
     <link href="{{ env('SUB') }}/public/css/app.css" rel="stylesheet">
 
@@ -61,7 +60,7 @@
             <about-component v-bind:about="{{ $aboutme }}"></about-component>
             <apps-component v-bind:projects="{{ $projects }}"></apps-component>
             <contact-component v-bind:sub="{{ $sub }}"></contact-component>
-            <copyright-component></copyright-component>
+            <copyright-component :contact="{{ $contact }}"></copyright-component>
         </div>
 
     </div>

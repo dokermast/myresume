@@ -6,7 +6,7 @@
                 <div class="col-lg-4 mb-5 mb-lg-0 bottom-block">
                     <h5 class="text-uppercase mb-4 h5-style">Location</h5>
                     <p class="lead mb-0">
-                        Kherson, Ukraine
+                        {{ contact.location }}
                     </p>
                 </div>
 
@@ -14,8 +14,8 @@
                     <h5 class="text-uppercase mb-4 h5-style">I am in ...</h5>
 
                     <div class="container text-center">
-                        <a class="btn btn-social mx-1 grey1" href="https://www.linkedin.com/in/vitalii-chebotnikov-83b270b9/"><i class="fab fa-fw fa-linkedin-in"  style='font-size:30px;'></i></a>
-                        <a class="btn btn-social mx-1 grey1" href="#"><i class="fab fa-fw fa-github"  style='font-size:30px;'></i></a>
+                        <a class="btn btn-social mx-1 grey1" :href="contact.linkin"><i class="fab fa-fw fa-linkedin-in"  style='font-size:30px;'></i></a>
+                        <a class="btn btn-social mx-1 grey1" :href="contact.github"><i class="fab fa-fw fa-github"  style='font-size:30px;'></i></a>
                     </div>
 
                 </div>
@@ -23,11 +23,11 @@
                 <div class="col-lg-4 mb-5 mb-lg-0 bottom-block">
                     <h5 class="text-uppercase mb-4 h5-style">Contacts</h5>
                     <p class="lead mb-0">
-                        Skype: figaro44i
+                        Skype: {{ contact.skype }}
                         <br />
-                        Phone: +380995259112
+                        Phone: {{ contact.phone }}
                         <br />
-                        Email: vit.chebotnikov@gmail.com
+                        Email: {{ contact.email }}
                     </p>
                 </div>
 
@@ -39,7 +39,10 @@
 
 <script>
     export default {
-        name: "CopyrightComponent"
+        name: "CopyrightComponent",
+        props: {
+            contact: Object
+        }
     }
 </script>
 

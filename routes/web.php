@@ -73,6 +73,11 @@ Route::group(['middleware' => 'auth'], function(){
         Route::group(['prefix' => 'visitors'], function () {
             Route::get('/', 'VisitorController@index')->name('visitors');
         });
+        Route::group(['prefix' => 'contacts'], function () {
+            Route::get('/', 'ContactController@index')->name('contacts');
+            Route::get('/edit', 'ContactController@edit')->name('edit_contact');
+            Route::post('/update/{id}', 'ContactController@update')->name('update_contact');
+        });
     });
 });
 
@@ -87,7 +92,5 @@ Route::match(['get', 'post'], '/password/reset', function () {     return view('
 //Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-//Route::get('/', function () {
-//    return view('welcome');
-//});
+
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Contact;
 use App\Events\NewEvent;
 use App\Aboutme;
 use App\Avatar;
@@ -16,7 +17,6 @@ use Illuminate\Http\Request;
 
 class MainController extends Controller
 {
-
     public function main(Request $request)
     {
         $ip = $request->getClientIp();
@@ -34,8 +34,10 @@ class MainController extends Controller
         $letter = Letter::where('status', 1)->first();
         $projects = Project::where('status', 1)->get();
         $sub = json_encode(env('SUB'));
+        $contact = Contact::find(1);
 
-        return view('layouts.main', compact('jobs'), ['avatar' => $avatar, 'aboutme' => $aboutme, 'image' =>$image, 'letter' => $letter, 'projects' => $projects, 'sub' => $sub ]);
+        return view('layouts.main', compact('jobs'),
+            ['avatar' => $avatar, 'aboutme' => $aboutme, 'image' =>$image, 'letter' => $letter,
+                'projects' => $projects, 'sub' => $sub, 'contact' => $contact ]);
     }
-
 }
